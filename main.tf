@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "this" {
-  name           = var.table_name
+  name = var.table_name
 
   billing_mode   = var.billing_mode
   write_capacity = var.billing_mode == "PROVISIONED" ? var.write_capacity : null

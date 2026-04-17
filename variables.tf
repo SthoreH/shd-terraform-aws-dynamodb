@@ -90,7 +90,7 @@ variable "billing_mode" {
   type        = string
   default     = "PAY_PER_REQUEST"
   validation {
-    condition = var.billing_mode == "PROVISIONED" || var.billing_mode == "PAY_PER_REQUEST"
+    condition     = var.billing_mode == "PROVISIONED" || var.billing_mode == "PAY_PER_REQUEST"
     error_message = "The billing mode must be either 'PROVISIONED' or 'PAY_PER_REQUEST'."
   }
 }
@@ -128,7 +128,7 @@ variable "tags" {
   type        = map(string)
   default     = {}
   validation {
-    condition = contains(keys(var.tags), "Repository")
+    condition     = contains(keys(var.tags), "Repository")
     error_message = "The 'Repository' tag is mandatory."
   }
 }
