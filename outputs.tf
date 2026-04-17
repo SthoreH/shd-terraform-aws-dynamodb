@@ -1,13 +1,14 @@
-# TODO: Add outputs for this module.
-# Expose the IDs, ARNs, and other attributes that consumers commonly need.
-#
-# Example:
-# output "id" {
-#   description = "The ID of the resource"
-#   value       = aws_example_resource.this.id
-# }
-#
-# output "arn" {
-#   description = "The ARN of the resource"
-#   value       = aws_example_resource.this.arn
-# }
+output "table_arn" {
+  description = "The ARN of the DynamoDB table"
+  value       = aws_dynamodb_table.this.arn
+}
+
+output "table_id" {
+  description = "The name of the table"
+  value       = aws_dynamodb_table.this.id
+}
+
+output "table_stream_arn" {
+  description = "The ARN of the Table Stream, if enabled"
+  value       = aws_dynamodb_table.this.stream_arn
+}

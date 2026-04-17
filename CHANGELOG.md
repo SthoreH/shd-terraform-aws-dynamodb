@@ -1,5 +1,7 @@
-# CHANGELOG
+# CHANGE LOG
 
-All notable changes to this project will be documented in this file.
+## [1.0.0] - 2026-04-16
 
-<!-- This file is automatically updated by semantic-release on each release to main. -->
+### Added
+
+- Initial version of the Terraform AWS DynamoDB module.

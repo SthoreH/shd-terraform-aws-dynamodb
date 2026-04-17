@@ -1,107 +1,86 @@
-# Terraform AWS \<module-name\> Module
+# Terraform AWS DynamoDB Module
 
-<!-- TODO: Replace <module-name> with the actual module name (e.g., s3-bucket, rds-cluster, ecs-service). -->
-<!-- TODO: Write a short description of what this module provisions and why someone would use it. -->
-
-This Terraform module creates [TODO: describe the AWS resources this module manages].
+This Terraform module creates a DynamoDB table in AWS.
 
 ## Features
 
-<!-- TODO: List the main features/resources created by this module. -->
-
-- TODO: Feature 1
-- TODO: Feature 2
+- Create a DynamoDB table
 
 ## Usage
 
-### Basic Example
-
 ```hcl
-# TODO: Replace with a minimal working example for this module.
-module "example" {
-  source = "git::https://github.com/<org>/<repo>.git?ref=v0.0.1" # TODO: update source
-
-  name = "my-resource-name" # TODO: update variable names and values
-
+module "dynamodb_table" {
+  source             = "github.com/DanHenrique/terraform-aws-dynamodb?ref=v1.0.0"
+  table_name         = "my-table"
+  billing_mode       = "PAY_PER_REQUEST"
+  pk_name            = "pk"
+  pk_type            = "S"
+  sk_name            = "sk"
+  sk_type            = "S"
+  ttl_enabled        = true
+  ttl_attribute_name = "ttl"
   tags = {
-    git_repository = "https://github.com/<org>/<repo>" # TODO: update
-    environment    = "dev"
+    creator        = "danhenrique"
+    Repository = "https://github.com/DanHenrique/terraform-aws-dynamodb"
   }
 }
 ```
 
-### Complete Example
+### Terraform steps
 
-```hcl
-# TODO: Replace with a complete example showcasing all available variables.
-module "example" {
-  source = "git::https://github.com/<org>/<repo>.git?ref=v0.0.1" # TODO: update source
+1. **Initialize Terraform**:
+  This command prepares the working directory by downloading the necessary plugins.
 
-  name = "my-resource-name" # TODO: update
+    ```bash
+    terraform init
+    ```
 
-  # TODO: add all optional variables with example values
+2. Check the Execution Plan:
+  Create an execution plan to see the changes Terraform will make to the infrastructure.
 
-  tags = {
-    git_repository = "https://github.com/<org>/<repo>" # TODO: update
-    environment    = "production"
-  }
-}
-```
+    ```bash
+    terraform plan -out=tfplan
+    ```
 
-## Requirements
+3. Apply the Execution Plan:
+  Apply the planned changes to create/modify the resources in your infrastructure.
 
-| Name | Version |
-|------|---------|
-| terraform | >= 1.0 |
-| aws | >= 5.0 |
+    ```bash
+    terraform apply tfplan
+    ```
 
-## Providers
+4. (Optional) Destroy the Resources:
+  If you need to remove all resources managed by Terraform, use the destroy command.
 
-| Name | Version |
-|------|---------|
-| aws | >= 5.0 |
+    ```bash
+    terraform destroy
+    ```
 
 ## Inputs
 
-<!-- TODO: Update the table below to reflect the actual variables defined in variables.tf. -->
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| name | TODO: describe what this name identifies | `string` | n/a | yes |
-| tags | Tags to apply to all resources. `git_repository` tag is mandatory. | `map(string)` | `{}` | yes |
+| Input               | Description                                                  | Example                      |
+|---------------------|--------------------------------------------------------------|------------------------------|
+| `table_name`        | The name of the DynamoDB table.                              | `"my-table"`                 |
+| `billing_mode`      | The billing mode of the DynamoDB table.                      | `"PAY_PER_REQUEST"`          |
+| `pk_name`           | The name of the partition key.                               | `"pk"`                       |
+| `pk_type`           | The type of the partition key.                               | `"S"`                        |
+| `sk_name`           | The name of the sort key.                                    | `"sk"`                       |
+| `sk_type`           | The type of the sort key.                                    | `"S"`                        |
+| `ttl_enabled`       | Whether TTL is enabled for the table.                        | `true`                       |
+| `ttl_attribute_name`| The name of the TTL attribute.                               | `"ttl"`                      |
+| `tags`              | A map of tags to add to the DynamoDB table.                  | `{creator: "danhenrique"...}`|
 
 ## Outputs
 
-<!-- TODO: Update the table below to reflect the actual outputs defined in outputs.tf. -->
-
-| Name | Description |
-|------|-------------|
-| TODO | TODO |
+| Name                  | Description                                           |
+|-----------------------|-------------------------------------------------------|
+| table_name            | The table name.                                       |
+| table_arn             | The table arn.                                        |
 
 ## Examples
 
-See the [examples](examples/) directory for complete usage examples:
-
-<!-- TODO: Update the list below when you add or rename examples. -->
-
-- [Complete](examples/complete/) — Full configuration example with all available options
-
-## Notes
-
-<!-- TODO: Add any important notes, constraints, or gotchas for users of this module. -->
-
-- The `git_repository` tag is mandatory and will cause a validation error if not provided.
-- TODO: Add any other relevant notes.
-
-## Contributing
-
-When contributing to this module, please ensure:
-
-1. All examples are tested and working.
-2. Documentation is updated for any new variables or outputs.
-3. Follow Terraform best practices and naming conventions.
-4. PR titles follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+- [Basic Usage](examples/)
 
 ## License
 
-This project is licensed under the MIT License — see the LICENSE file for details.
+N/A
