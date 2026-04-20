@@ -2,6 +2,7 @@
 
 This Terraform module creates a DynamoDB table in AWS.
 
+
 ## Features
 
 - Create a DynamoDB table

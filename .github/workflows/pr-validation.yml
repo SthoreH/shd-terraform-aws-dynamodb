@@ -12,6 +12,7 @@ concurrency:
 
 permissions:
   pull-requests: read
+  contents: read
 
 jobs:
   validate-pr:
@@ -26,7 +27,7 @@ jobs:
           validate-description: 'false'
 
   validate-terraform:
-    name: Validate Terraform Module
+    name: Validate Terraform
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
